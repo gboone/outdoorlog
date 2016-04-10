@@ -1,0 +1,9 @@
+---
+---
+[{% assign hikes = site.hikes | sort: "park" %}{% for hike in hikes %}
+  {
+      "parkName": "{{ hike.park }}",
+      "parkLat": "{{ hike.lat }}",
+      "parkLng": "{{ hike.lon }}"
+  }{% unless forloop.last %},{% endunless%}{% endfor %}
+]

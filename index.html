@@ -4,16 +4,17 @@ layout: default
 {% assign total = 0 %}
 <div class="home">
   {% for activity in site.hikes %}
-    <h2>{{ activity.date | date: "%B %-d, %Y" }}: {{ activity.activity | capitalize }} in {{ activity.park }}, {{ activity.state }}</h2>
-    <ul>
-      <li>Trail: {{ activity.trail }}</li>
-      <li>{{ activity.distance }} mi</li>{% assign total = total + activity.distance %}
-      <li>Elevation: {{ activity.base }} ft</li>
-      <li>Gain: {{ activity.gain }} ft</li>
-      <li>Activity: {{ activity.activity }}</li>
-    </ul>
-    {% if activity.content %}<p>{{ activity.content }}</p>{% endif %}
-    <p><a href="{{ activity.url }}">Learn more about this trail</a></p>
+    <div class="activity {{ activity.date | date: '%B %d, %Y'}}" data-park="{{ activity.park }}"  data-trail="{{ activity.trail }}" data-dist="{{ activity.distance }}" data-base="{{ activity.base }}" data-gain="{{ activity.gain }}" data-type="{{ activity.activity }}" data-lat="{{ activity.lat }}" data-lng="{{ activity.lon }}"><h2>{{ activity.date | date: "%B %-d, %Y" }}: {{ activity.activity | capitalize }} in {{ activity.park }}, {{ activity.state }}</h2>
+      <ul>
+        <li>Trail: {{ activity.trail }}</li>
+        <li>{{ activity.distance }} mi</li>{% assign total = total + activity.distance %}
+        <li>Elevation: {{ activity.base }} ft</li>
+        <li>Gain: {{ activity.gain }} ft</li>
+        <li>Activity: {{ activity.activity }}</li>
+      </ul>
+      {% if activity.content %}<p>{{ activity.content }}</p>{% endif %}
+      <p><a href="{{ activity.url }}">Learn more about this trail</a></p>
+    </div>
   {% endfor %}
 </div>
 <h3 id="total-distance">Total distance hiked: </h3>

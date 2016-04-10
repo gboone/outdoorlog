@@ -18,3 +18,5 @@ markdown: kramdown
 collections:
   hikes:
     output: true
+  api:
+    output: true
