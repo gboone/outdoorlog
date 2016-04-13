@@ -2,7 +2,7 @@ requirejs.config({
   baseUrl: '/assets/js/lib',
 });
 
-require(['jquery-2.2.3', 'underscore', 'leaflet'], function (jQuery, _, leaflet) {
+require(['jquery-2.2.3', 'underscore'], function (jQuery, _) {
   var activities = $(".activity");
   total_miles = function() {
     var total_miles = 0
