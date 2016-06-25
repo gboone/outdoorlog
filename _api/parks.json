@@ -1,9 +1,34 @@
 ---
 ---
-[{% assign hikes = site.hikes | sort: "park" %}{% for hike in hikes %}
-  {
-      "parkName": "{{ hike.park }}",
-      "parkLat": "{{ hike.lat }}",
-      "parkLng": "{{ hike.lon }}"
-  }{% unless forloop.last %},{% endunless%}{% endfor %}
-]
+{
+	"type": "FeatureCollection",
+	"features": [
+	{% for hike in site.hikes %} 
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			{{ hike.lon }},
+		  			{{ hike.lat }}
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "{{ hike.park }}",
+					"state": "{{ hike.state }}",
+					"trail": "{{ hike.trail }}",
+					"distance": "{{ hike.distance }}",
+					"baseElevation": "{{ hike.base }}",
+					"gainElevation": "{{ hike.gain }}",
+					"type": "{{ hike.activity }}",
+					"url": "{{ hike.info }}"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "{{ hike.url | prepend: site.url }}"
+		  	}
+		}{% if forloop.last != true %},{% endif%}
+		{% endfor %}
+	]
+}
