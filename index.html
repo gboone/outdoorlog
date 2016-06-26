@@ -4,7 +4,7 @@ layout: default
 {% assign total = 0 %}
 <div class="home">
   {% for activity in site.hikes %}
-    <div class="activity {{ activity.date | date: '%B %d, %Y'}}" data-park="{{ activity.park }}"  data-trail="{{ activity.trail }}" data-dist="{{ activity.distance }}" data-base="{{ activity.base }}" data-gain="{{ activity.gain }}" data-type="{{ activity.activity }}" data-lat="{{ activity.lat }}" data-lng="{{ activity.lon }}"><h2>{{ activity.date | date: "%B %-d, %Y" }}: {{ activity.activity | capitalize }} in {{ activity.park }}, {{ activity.state }}</h2>
+    <div class="activity {{ activity.date | date: '%B %d, %Y'}}" data-park="{{ activity.park }}"  data-trail="{{ activity.trail }}" data-dist="{{ activity.distance }}" data-base="{{ activity.base }}" data-gain="{{ activity.gain }}" data-type="{{ activity.activity }}" data-lat="{{ activity.lat }}" data-lng="{{ activity.lon }}"><h2><a href="{{ activity.url  | prepend: site.baseurl }}">{{ activity.date | date: "%B %-d, %Y" }}: {{ activity.activity | capitalize }} in {{ activity.park }}, {{ activity.state }}</a></h2>
       <ul>
         <li>Trail: {{ activity.trail }}</li>
         <li>{{ activity.distance }} mi</li>{% assign total = total + activity.distance %}

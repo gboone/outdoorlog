@@ -17,23 +17,34 @@ require(['jquery-2.2.3', 'underscore', 'leaflet'], function (jQuery, _, leaflet)
     return total_miles
   }
   $("#total-distance").append(total_miles)
-  
-  if ($('#parks')) {
-    var Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
+  var Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
       attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
       minZoom: 0,
       maxZoom: 20,
       ext: 'png'
     });
+  if ($('#parks').attr("type") == "application/json") {
     var map = new L.Map('map');
     var latlng = new L.LatLng("44", "-96");
-        map.setView(latlng)
+    map.setView(latlng)
     map.setZoom(4)
     map.addLayer(Toner)
     $.getJSON( $("#parks").attr('src'), function( data ) {
       L.geoJson(data, {
         onEachFeature: onEachFeature
       }).addTo(map);
+    })
+    .fail(function( ) {
+      console.log("Something is wrong. Check the syntax of the JSON at " + $("#parks").attr("src"));
+    })
+  }
+  if ($("#path-data")) {
+    var map = new L.Map('map');
+    var latlng = new L.LatLng(map._container.dataset.lat, map._container.dataset.lon)
+    map.setView(latlng)
+    map.setZoom(14)
+    $.getJSON( $("#path-data").attr('src'), function( data ) {
+      L.geoJson(data).addTo(map);
     })
     .fail(function( ) {
       console.log("Something is wrong. Check the syntax of the JSON at " + $("#parks").attr("src"));

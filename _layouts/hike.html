@@ -10,6 +10,7 @@ layout: default
 
   <div class="post-content" itemprop="articleBody">
     {{ content }}
+    <div id="map" data-lat="{{ page.lat }}" data-lon="{{ page.lon }}"></div>
   </div>
-
 </article>
+<script type="application/json" src="{{ page.trail_data }}" id="path-data"></script>
