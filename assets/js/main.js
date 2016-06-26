@@ -26,9 +26,9 @@ require(['jquery-2.2.3', 'underscore', 'leaflet'], function (jQuery, _, leaflet)
       ext: 'png'
     });
     var map = new L.Map('map');
-    var latlng = new L.LatLng("39", "-105.5");
+    var latlng = new L.LatLng("44", "-96");
         map.setView(latlng)
-    map.setZoom(7)
+    map.setZoom(4)
     map.addLayer(Toner)
     $.getJSON( $("#parks").attr('src'), function( data ) {
       L.geoJson(data, {
