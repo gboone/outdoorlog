@@ -16,6 +16,10 @@ require(['jquery-2.2.3', 'underscore', 'leaflet'], function (jQuery, _, leaflet)
     })
     return total_miles
   }
+  function trailAnnotation(feature, layer){
+    var message = feature.properties.Hiking_Name + " ESRI: " + feature.properties.ESRI_OID + " Object: " + feature.properties.OBJECTID;
+    layer.bindPopup(message)
+  }
   $("#total-distance").append(total_miles)
   var Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
       attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
@@ -43,8 +47,11 @@ require(['jquery-2.2.3', 'underscore', 'leaflet'], function (jQuery, _, leaflet)
     var latlng = new L.LatLng(map._container.dataset.lat, map._container.dataset.lon)
     map.setView(latlng)
     map.setZoom(14)
+    map.addLayer(Toner)
     $.getJSON( $("#path-data").attr('src'), function( data ) {
-      L.geoJson(data).addTo(map);
+      L.geoJson(data, {
+        onEachFeature: trailAnnotation
+      }).addTo(map);
     })
     .fail(function( ) {
       console.log("Something is wrong. Check the syntax of the JSON at " + $("#parks").attr("src"));
