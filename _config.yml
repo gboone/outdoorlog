@@ -20,3 +20,10 @@ collections:
     output: true
   api:
     output: true
+
+defaults:
+  -
+    scope:
+      type: "hikes"
+    values:
+      layout: "hike"

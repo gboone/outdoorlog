@@ -26,7 +26,7 @@
 		  		}
 		  	},
 		  	"self": {
-		  		"url": "{{ hike.url | prepend: site.url }}"
+		  		"url": "{{ hike.url | prepend: site.baseurl }}"
 		  	}
 		}{% if forloop.last != true %},{% endif%}
 		{% endfor %}

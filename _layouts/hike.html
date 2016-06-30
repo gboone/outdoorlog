@@ -4,13 +4,23 @@ layout: default
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
-    <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
+    <h1 class="post-title" itemprop="name headline">A {{ page.activity }} adventure in {{ page.park }} on <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time></h1>
   </header>
 
   <div class="post-content" itemprop="articleBody">
     {{ content }}
+    {% if page.trail_data %}
+    <p>Here's a map of the trail we walked. It might not be <em>exactly</em> the route we did, but you can thank the people who maintain {{ page.park }} for making this trail data open.</p>
+    {% else %}
+    <p>We don't have data for the exact trail we walked, but here's an overview of the area around it. The center of the map is roughly where the trailhead is.</p>
+    {% endif %}
     <div id="map" data-lat="{{ page.lat }}" data-lon="{{ page.lon }}"></div>
+    <h2>About this adventure:</h2>
+    <ul>
+    	<li>{{ page.distance }} miles of {{ page.activity}} in beautiful {{ page.state }}</li>
+    	<li>The adventure started at {{ page.base }} feet and gained or lost {{ page.gain }} feet.</li>
+    	<li>You can learn more about <a href="{{ page.info }}">{{ page.park }}</a> and the {{ page.trail }} on their website.</li>
+  	</ul>
   </div>
 </article>
 <script type="application/json" src="{{ page.trail_data }}" id="path-data"></script>
