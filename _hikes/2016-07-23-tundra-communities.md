@@ -7,7 +7,7 @@ base: 12050
 gain: 250
 activity: hiking
 info: http://rockymountainnationalpark.com/things-do/hiking/Tundra-Communities-Trail
-date: 2016-07-23
+date: 2016-07-23 14:00
 lat: "40.4121949"
 lon: "-105.7329252"
 ---
