@@ -64,7 +64,7 @@ require(['jquery-2.2.3', 'underscore', 'leaflet'], function (jQuery, _, leaflet)
         console.log("Somthing is wrong. Check the syntax of the JSON at " + $('#grsa').attr('src'));
       })
     }
-    if ($("#path-data")) {
+    if ($("#path-data") != [] ) {
       var latlng = new L.LatLng(map._container.dataset.lat, map._container.dataset.lon)
       map.setView(latlng)
       map.setZoom(14)
