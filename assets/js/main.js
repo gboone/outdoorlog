@@ -55,6 +55,14 @@ require(['jquery-2.2.3', 'underscore', 'leaflet'], function (jQuery, _, leaflet)
       .fail(function() {
         console.log("Somthing is wrong. Check the syntax of the JSON at " + $('#romo').attr('src'));
       })
+      $.getJSON( $('#grsa').attr('src'), function( data ) {
+        L.geoJson(data, {
+          stroke: true
+        }).addTo(map);
+      })
+      .fail(function() {
+        console.log("Somthing is wrong. Check the syntax of the JSON at " + $('#grsa').attr('src'));
+      })
     }
     if ($("#path-data")) {
       var latlng = new L.LatLng(map._container.dataset.lat, map._container.dataset.lon)
