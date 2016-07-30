@@ -25,7 +25,7 @@ require(['jquery-2.2.3', 'underscore', 'leaflet'], function (jQuery, _, leaflet)
     layer.bindPopup(message)
   }
   $("#total-distance").append(total_miles)
-  
+
   if ( $("#map") ) {
     var Tiles = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
         attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
@@ -46,6 +46,14 @@ require(['jquery-2.2.3', 'underscore', 'leaflet'], function (jQuery, _, leaflet)
       })
       .fail(function( ) {
         console.log("Something is wrong. Check the syntax of the JSON at " + $("#parks").attr("src"));
+      })
+      $.getJSON( $('#romo').attr('src'), function( data ) {
+        L.geoJson(data, {
+          stroke: true
+        }).addTo(map);
+      })
+      .fail(function() {
+        console.log("Somthing is wrong. Check the syntax of the JSON at " + $('#romo').attr('src'));
       })
     }
     if ($("#path-data")) {
