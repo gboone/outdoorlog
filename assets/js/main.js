@@ -34,18 +34,18 @@ require(['jquery-2.2.3', 'underscore', 'leaflet'], function (jQuery, _, leaflet)
         ext: 'png'
       });
     var map = new L.Map('map');
-    if ($('#parks').attr("type") == "application/json") {
+    if ($('#activities').attr("type") == "application/json") {
       var latlng = new L.LatLng(44, -96);
       map.setView(latlng)
       map.setZoom(4)
       map.addLayer(Tiles)
-      $.getJSON( $("#parks").attr('src'), function( data ) {
+      $.getJSON( $("#activities").attr('src'), function( data ) {
         L.geoJson(data, {
           onEachFeature: markerAnnotation
         }).addTo(map);
       })
       .fail(function( ) {
-        console.log("Something is wrong. Check the syntax of the JSON at " + $("#parks").attr("src"));
+        console.log("Something is wrong. Check the syntax of the JSON at " + $("#activities").attr("src"));
       })
       $.getJSON( $('#romo').attr('src'), function( data ) {
         L.geoJson(data, {
@@ -63,6 +63,14 @@ require(['jquery-2.2.3', 'underscore', 'leaflet'], function (jQuery, _, leaflet)
       .fail(function() {
         console.log("Somthing is wrong. Check the syntax of the JSON at " + $('#grsa').attr('src'));
       })
+      $.getJSON( $('#maroon-snowmass').attr('src'), function( data ) {
+        L.geoJson(data, {
+          stroke: true
+        }).addTo(map);
+      })
+      .fail(function() {
+        console.log("Somthing is wrong. Check the syntax of the JSON at " + $('#maroon-snowmass').attr('src'));
+      })
     }
     if ($("#path-data") != [] ) {
       var latlng = new L.LatLng(map._container.dataset.lat, map._container.dataset.lon)
@@ -75,19 +83,8 @@ require(['jquery-2.2.3', 'underscore', 'leaflet'], function (jQuery, _, leaflet)
         }).addTo(map);
       })
       .fail(function( ) {
-        console.log("Something is wrong. Check the syntax of the JSON at " + $("#parks").attr("src"));
+        console.log("Something is wrong. Check the syntax of the JSON at " + $("#path-data").attr("src"));
       })
     }
   }
 })
-
-
-// if (document.getElementById('activities') != null) {
-//   var activities = JSON.parse(document.getElementById('activities').innerHTML);
-//   document.getElementById('total-distance').innerHTML += total_miles(activities)
-// }
-// if (document.getElementById('parks')) {
-//   var parks = jsonFromURI(document.getElementById('parks').baseURI)
-//   debugger;
-//   parks = dedupeJSON(parks)
-// }
