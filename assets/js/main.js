@@ -37,7 +37,7 @@ require(['jquery-2.2.3', 'underscore', 'leaflet'], function (jQuery, _, leaflet)
     if ($('#activities').attr("type") == "application/json") {
       var latlng = new L.LatLng(44, -96);
       map.setView(latlng)
-      map.setZoom(4)
+      map.setZoom(5)
       map.addLayer(Tiles)
       $.getJSON( $("#activities").attr('src'), function( data ) {
         L.geoJson(data, {
