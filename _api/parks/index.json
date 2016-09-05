@@ -1,0 +1,8 @@
+---
+name: index
+---
+[{% for api in site.api %}
+
+	{% unless api.name == "index" %}{{ api }}{% unless forloop.last %},{% endunless %}{% endunless %}
+{% endfor %}
+]
