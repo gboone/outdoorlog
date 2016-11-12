@@ -3,7 +3,7 @@
 {
 	"type": "FeatureCollection",
 	"features": [
-	{% for hike in site.hikes %} 
+	{% for hike in site.hikes %}
 		{
 		  	"type": "Feature",
 		  	"geometry": {
@@ -22,7 +22,8 @@
 					"baseElevation": "{{ hike.base }}",
 					"gainElevation": "{{ hike.gain }}",
 					"type": "{{ hike.activity }}",
-					"url": "{{ hike.info }}"
+					"info": "{{ hike.info }}",
+					"date": "{{ hike.date }}"
 		  		}
 		  	},
 		  	"self": {
